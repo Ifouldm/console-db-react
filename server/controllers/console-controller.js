@@ -47,7 +47,9 @@ const updateConsole = async (req, res) => {
                 message: 'Console not found!',
             });
         }
+        // eslint-disable-next-line no-param-reassign
         console.name = body.name;
+        // eslint-disable-next-line no-param-reassign
         console.description = body.description;
         console
             .save()

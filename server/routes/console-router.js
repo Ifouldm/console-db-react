@@ -8,6 +8,6 @@ router.post('/console', ConsoleCtrl.createConsole);
 router.put('/console/:id', ConsoleCtrl.updateConsole);
 router.delete('/console/:id', ConsoleCtrl.deleteConsole);
 router.get('/console/:id', ConsoleCtrl.getConsoleById);
-router.get('/console', ConsoleCtrl.getConsoles);
+router.get('/consoles', ConsoleCtrl.getConsoles);
 
 module.exports = router;
