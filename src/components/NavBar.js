@@ -1,25 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-
+import { Container, Navbar } from 'react-bootstrap';
 import Logo from './Logo';
 import Links from './Links';
 
-const Container = styled.div.attrs({
-    className: 'container',
-})``;
-
-const Nav = styled.nav.attrs({
-    className: 'navbar navbar-expand-lg navbar-dark bg-dark',
-})`
-    margin-bottom: 20 px;
-`;
-
 const NavBar = () => (
     <Container>
-        <Nav>
+        <Navbar bg="dark" variant="dark" expand="lg">
             <Logo />
             <Links />
-        </Nav>
+        </Navbar>
     </Container>
 );
 

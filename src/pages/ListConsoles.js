@@ -1,27 +1,7 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import { Loading, Button } from '../components';
+import { Card, Container } from 'react-bootstrap';
+import { IconButton, Loading } from '../components';
 import api from '../api';
-
-const Card = styled.div.attrs({
-    className: 'card',
-})``;
-
-const CardTitle = styled.div.attrs({
-    className: 'card-title',
-})``;
-
-const CardDescription = styled.div.attrs({
-    className: 'card-text',
-})``;
-
-const Container = styled.div.attrs({
-    className: 'container',
-})``;
-
-const CardBody = styled.div.attrs({
-    className: 'card-body',
-})``;
 
 class ListConsoles extends Component {
     constructor(props) {
@@ -52,13 +32,13 @@ class ListConsoles extends Component {
             <Container>
                 {
                     consoles.map((console) => (
-                        <Card key={console.name}>
-                            <CardTitle>{console.name}</CardTitle>
-                            <CardBody>
-                                <CardDescription>{console.description}</CardDescription>
-                                <Button type="edit" link={`/console/update/${console._id}`} />
-                                <Button type="delete" link={`/console/delete/${console._id}`} />
-                            </CardBody>
+                        <Card key={console._id}>
+                            <Card.Title>{console.name}</Card.Title>
+                            <Card.Body>
+                                <Card.Text>{console.description}</Card.Text>
+                                <IconButton type="edit" link={`/console/update/${console._id}`} />
+                                <IconButton type="delete" link={`/console/delete/${console._id}`} />
+                            </Card.Body>
                         </Card>
                     ))
                 }

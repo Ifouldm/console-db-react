@@ -1,38 +1,26 @@
 import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-
-const Collapse = styled.div.attrs({
-    className: 'collpase navbar-collapse',
-})``;
-
-const List = styled.div.attrs({
-    className: 'navbar-nav mr-auto',
-})``;
-
-const Item = styled.div.attrs({
-    className: 'collpase navbar-collapse',
-})``;
 
 const Links = () => (
     <>
         <Link to="/" className="navbar-brand">
             Console Database
         </Link>
-        <Collapse>
-            <List>
-                <Item>
+        <Navbar.Collapse>
+            <Nav>
+                <Nav.Item>
                     <Link to="/console/list" className="nav-link">
                         List Consoles
                     </Link>
-                </Item>
-                <Item>
+                </Nav.Item>
+                <Nav.Item>
                     <Link to="/console/add" className="nav-link">
                         Add a Console
                     </Link>
-                </Item>
-            </List>
-        </Collapse>
+                </Nav.Item>
+            </Nav>
+        </Navbar.Collapse>
     </>
 );
 
