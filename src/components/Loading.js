@@ -1,11 +1,12 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 import loadingImage from './loading.gif';
 
 const Loading = () => (
-    <div>
+    <Container>
         <img src={loadingImage} width="100" height="100" alt="loading" />
-    </div>
+    </Container>
 );
 
 export default Loading;

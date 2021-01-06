@@ -32,7 +32,7 @@ class ListConsoles extends Component {
             <Container>
                 {
                     consoles.map((console) => (
-                        <Card key={console._id}>
+                        <Card key={console._id} className="m-3">
                             <Card.Title>{console.name}</Card.Title>
                             <Card.Body>
                                 <Card.Text>{console.description}</Card.Text>
