@@ -4,7 +4,7 @@ import Logo from './Logo';
 import Links from './Links';
 
 const NavBar = () => (
-    <Container>
+    <Container className="mb-3">
         <Navbar bg="dark" variant="dark" expand="lg">
             <Logo />
             <Links />

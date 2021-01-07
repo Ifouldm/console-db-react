@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import {
+    Card, Form, Button, Alert,
+} from 'react-bootstrap';
 import { insertConsole } from '../api';
 
 class AddConsole extends Component {
@@ -39,24 +41,37 @@ class AddConsole extends Component {
     render() {
         const { name, description } = this.state;
         return (
-            <Form>
-                <Alert>Create Console</Alert>
+            <Card>
+                <Form>
+                    <Card.Title>
+                        <Alert variant="primary">Create Console</Alert>
+                    </Card.Title>
+                    <Card.Body>
+                        <Form.Group>
+                            <Form.Label>Name: </Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={name}
+                                onChange={this.handleChangeInputName}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Description: </Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={description}
+                                onChange={this.handleChangeInputDescription}
+                            />
+                        </Form.Group>
 
-                <Form.Label>Name: </Form.Label>
-                <Form.Control
-                    type="text"
-                    value={name}
-                    onChange={this.handleChangeInputName}
-                />
-                <Form.Label>Description: </Form.Label>
-                <Form.Control
-                    type="text"
-                    value={description}
-                    onChange={this.handleChangeInputDescription}
-                />
-                <Button onClick={this.handleAddMovie}>Add Console</Button>
-                <Button href="/console/list">Cancel</Button>
-            </Form>
+                        <Form.Group>
+                            <Button onClick={this.handleAddMovie}>Add Console</Button>
+                            {' '}
+                            <Button href="/console/list">Cancel</Button>
+                        </Form.Group>
+                    </Card.Body>
+                </Form>
+            </Card>
         );
     }
 }

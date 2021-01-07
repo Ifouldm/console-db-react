@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Card, Container } from 'react-bootstrap';
-import { IconButton, Loading } from '../components';
+import { Container } from 'react-bootstrap';
+import { Loading } from '../components';
 import api from '../api';
+import ConsoleCard from '../components/ConsoleCard';
 
 class ListConsoles extends Component {
     constructor(props) {
@@ -32,14 +33,7 @@ class ListConsoles extends Component {
             <Container>
                 {
                     consoles.map((console) => (
-                        <Card key={console._id} className="m-3">
-                            <Card.Title>{console.name}</Card.Title>
-                            <Card.Body>
-                                <Card.Text>{console.description}</Card.Text>
-                                <IconButton type="edit" link={`/console/update/${console._id}`} />
-                                <IconButton type="delete" link={`/console/delete/${console._id}`} />
-                            </Card.Body>
-                        </Card>
+                        <ConsoleCard console={console} />
                     ))
                 }
             </Container>

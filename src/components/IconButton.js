@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const IconButton = function button(props) {
-    // eslint-disable-next-line react/prop-types
     const { type, link } = props;
     if (type === 'edit') {
         return (<Button href={link} variant="warning"><FontAwesomeIcon icon={faEdit} /></Button>);
