@@ -1,7 +1,9 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 
 mongoose
-    .connect('mongodb://127.0.0.1:27017/consoleTest', { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch((e) => {
         console.error('Connection error', e.message);
     });
