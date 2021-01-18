@@ -1,39 +1,39 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import { Loading } from '../components';
+import GameCard from '../components/GameCard';
 import api from '../api';
-import ConsoleCard from '../components/ConsoleCard';
 
-class ListConsoles extends Component {
+class ListGames extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: false,
-            consoles: [],
+            games: [],
         };
     }
 
     async componentDidMount() {
         this.setState({ isLoading: true });
         // eslint-disable-next-line import/no-named-as-default-member
-        await api.getAllConsoles().then((consoles) => {
+        await api.getAllGames().then((games) => {
             this.setState({
-                consoles: consoles.data.data,
+                games: games.data.data,
                 isLoading: false,
             });
         });
     }
 
     render() {
-        const { consoles, isLoading } = this.state;
+        const { games, isLoading } = this.state;
         if (isLoading) {
             return (<Loading />);
         }
         return (
             <Container>
                 {
-                    consoles.map((console) => (
-                        <ConsoleCard console={console} key={console._id} />
+                    games.map((game) => (
+                        <GameCard game={game} key={game._id} />
                     ))
                 }
             </Container>
@@ -41,4 +41,4 @@ class ListConsoles extends Component {
     }
 }
 
-export default ListConsoles;
+export default ListGames;

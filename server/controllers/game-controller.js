@@ -1,36 +1,36 @@
-const Console = require('../models/console-model');
+const Game = require('../models/game-model');
 
-const createConsole = (req, res) => {
+const createGame = (req, res) => {
     const { body } = req;
 
     if (!body) {
         return res.status(400).json({
             success: false,
-            error: 'You must provide a console',
+            error: 'You must provide a game',
         });
     }
 
-    const console = new Console(body);
+    const game = new Game(body);
 
-    if (!console) {
+    if (!game) {
         return res.status(400).json({ success: false, error: 'err' });
     }
 
-    console
+    game
         .save()
         .then(() => res.status(201).json({
             success: true,
-            id: console._id,
-            message: 'Console created!',
+            id: game._id,
+            message: 'Game created!',
         }))
         .catch((error) => res.status(400).json({
             error,
-            message: 'Console not created!',
+            message: 'Game not created!',
         }));
     return null;
 };
 
-const updateConsole = async (req, res) => {
+const updateGame = async (req, res) => {
     const { body } = req;
 
     if (!body) {
@@ -40,82 +40,82 @@ const updateConsole = async (req, res) => {
         });
     }
 
-    Console.findOne({ _id: req.params.id }, (err, console) => {
+    Game.findOne({ _id: req.params.id }, (err, game) => {
         if (err) {
             return res.status(404).json({
                 err,
-                message: 'Console not found!',
+                message: 'Game not found!',
             });
         }
         // eslint-disable-next-line no-param-reassign
-        console.name = body.name;
+        game.name = body.name;
         // eslint-disable-next-line no-param-reassign
-        console.description = body.description;
-        console
+        game.description = body.description;
+        game
             .save()
             .then(() => res.status(200).json({
                 success: true,
-                id: console._id,
-                message: 'Console updated!',
+                id: game._id,
+                message: 'Game updated!',
             }))
             .catch((error) => res.status(404).json({
                 error,
-                message: 'Console not updated!',
+                message: 'Game not updated!',
             }));
         return null;
     });
     return null;
 };
 
-const deleteConsole = async (req, res) => {
-    await Console.findOneAndDelete({ _id: req.params.id }, (err, console) => {
+const deleteGame = async (req, res) => {
+    await Game.findOneAndDelete({ _id: req.params.id }, (err, game) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
 
-        if (!console) {
+        if (!game) {
             return res
                 .status(404)
-                .json({ success: false, error: 'Console not found' });
+                .json({ success: false, error: 'Game not found' });
         }
 
-        return res.status(200).json({ success: true, data: console });
-    }).catch((err) => console.log(err));
+        return res.status(200).json({ success: true, data: game });
+    }).catch((err) => console.error(err));
 };
 
-const getConsoleById = async (req, res) => {
-    await Console.findOne({ _id: req.params.id }, (err, console) => {
+const getGameById = async (req, res) => {
+    await Game.findOne({ _id: req.params.id }, (err, game) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
 
-        if (!console) {
+        if (!game) {
             return res
                 .status(404)
-                .json({ success: false, error: 'Console not found' });
+                .json({ success: false, error: 'Game not found' });
         }
-        return res.status(200).json({ success: true, data: console });
-    }).catch((err) => console.log(err));
+        return res.status(200).json({ success: true, data: game });
+    }).catch((err) => console.error(err));
 };
 
-const getConsoles = async (req, res) => {
-    await Console.find({}, (err, consoles) => {
+const getGames = async (req, res) => {
+    await Game.find({}, (err, consoles) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
         // if (!consoles.length) {
         //     return res
         //         .status(404)
-        //         .json({ success: false, error: 'Console not found' });
+        //         .json({ success: false, error: 'Game not found' });
         // }
         return res.status(200).json({ success: true, data: consoles });
-    }).catch((err) => console.log(err));
+    }).catch((err) => console.error(err));
 };
 
 module.exports = {
-    createConsole,
-    updateConsole,
-    deleteConsole,
-    getConsoles,
-    getConsoleById,
+    createGame,
+    updateGame,
+    deleteGame,
+    getGames,
+    getGameById,
 };

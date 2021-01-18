@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const db = require('./db');
 const consoleRouter = require('./routes/console-router');
+const gameRouter = require('./routes/game-router');
 
 const app = express();
 const apiPort = 3000;
@@ -19,5 +20,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', consoleRouter);
+app.use('/api', gameRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));

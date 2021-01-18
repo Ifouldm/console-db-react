@@ -15,6 +15,11 @@ const Links = () => (
                     </Link>
                 </Nav.Item>
                 <Nav.Item>
+                    <Link to="/game/list" className="nav-link">
+                        List Games
+                    </Link>
+                </Nav.Item>
+                <Nav.Item>
                     <Link to="/console/add" className="nav-link">
                         Add a Console
                     </Link>

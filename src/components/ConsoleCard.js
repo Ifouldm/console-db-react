@@ -1,11 +1,11 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { IconButton } from '.';
+import IconButton from './IconButton';
 
 function ConsoleCard(props) {
     const { console } = props;
     return (
-        <Card key={console._id} className="m-3">
+        <Card className="m-3">
             <Card.Header>{console.name}</Card.Header>
             <Card.Body>
                 <Card.Text>{console.description}</Card.Text>
