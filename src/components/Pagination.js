@@ -22,8 +22,9 @@ const range = (from, to, step = 1) => {
 class Paginator extends Component {
     constructor(props) {
         super(props);
-        const { totalRecords, pageLimit, pageNeighbours } = props;
-
+        const {
+            totalRecords, pageLimit, pageNeighbours,
+        } = props;
         this.pageLimit = typeof pageLimit === 'number' ? pageLimit : 30;
         this.totalRecords = typeof totalRecords === 'number' ? totalRecords : 0;
 
@@ -176,11 +177,13 @@ Paginator.propTypes = {
     totalRecords: PropTypes.number.isRequired,
     pageLimit: PropTypes.number,
     pageNeighbours: PropTypes.number,
+    onPageChanged: PropTypes.func,
 };
 
 Paginator.getDefaultProps = {
-    pageLimit: 10,
+    pageLimit: 20,
     pageNeighbours: 0,
+    onPageChanged: () => {},
 };
 
 export default Paginator;

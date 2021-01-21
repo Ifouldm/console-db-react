@@ -6,7 +6,7 @@ function GameCard(props) {
     const { game } = props;
     return (
         <Card className="m-3">
-            <Card.Header>{game.name}</Card.Header>
+            <Card.Header>{game.gameName}</Card.Header>
             <Card.Body>
                 <Card.Text>{game.description}</Card.Text>
                 <IconButton type="edit" link={`/game/update/${game._id}`} />

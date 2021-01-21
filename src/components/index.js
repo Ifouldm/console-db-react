@@ -4,7 +4,8 @@ import NavBar from './NavBar';
 import Loading from './Loading';
 import IconButton from './IconButton';
 import Paginator from './Pagination';
+import Error from './Error';
 
 export {
-    Links, Logo, NavBar, Loading, IconButton, Paginator,
+    Links, Logo, NavBar, Loading, IconButton, Paginator, Error,
 };
