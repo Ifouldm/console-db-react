@@ -24,7 +24,13 @@
     border: solid 1px #5A4181;
 }
 
+.cardImg {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+}
+
 .logoImg {
-    max-height: 50px;
-    width: auto;
+    margin: 0.5rem;
+    width: 10%;
 }
