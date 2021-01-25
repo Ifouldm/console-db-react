@@ -24,9 +24,9 @@
     border: solid 1px #5A4181;
 }
 
-.cardImg {
+.cardHeader {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     vertical-align: middle;
 }
 
