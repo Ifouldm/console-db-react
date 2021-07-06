@@ -5,14 +5,24 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Loading, Paginator, Error } from '../components';
 import GameCard from '../components/GameCard';
 import api from '../api';
+import { GameModel } from '../types';
 
-class ListGames extends Component {
-    constructor(props) {
+interface IState {
+    isLoading: boolean,
+    games?: GameModel[],
+    totalRecords?: number,
+    pageLimit?: number,
+    error?: string,
+}
+
+interface IProps {}
+class ListGames extends Component<IProps, IState> {
+    pageSize = 24;
+    constructor(props: IProps) {
         super(props);
         this.state = {
             isLoading: true,
         };
-        this.pageSize = 24;
         this.onPageChanged = this.onPageChanged.bind(this);
     }
 
@@ -33,14 +43,14 @@ class ListGames extends Component {
         });
     }
 
-    onPageChanged({ currentPage: pageRequested }) {
+    onPageChanged({ currentPage }: {currentPage: number}) {
         this.setState({ isLoading: true });
         // eslint-disable-next-line import/no-named-as-default-member
-        api.getAllGames(pageRequested - 1, this.pageSize).then((games) => {
+        api.getAllGames(currentPage - 1, this.pageSize).then((games) => {
             this.setState({
                 games: games.data._embedded.game,
                 isLoading: false,
-                error: null,
+                error: '',
             });
         }).catch((error) => {
             this.setState({

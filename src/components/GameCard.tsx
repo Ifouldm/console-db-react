@@ -4,8 +4,9 @@ import { Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropType from 'prop-types';
 import IconButton from './IconButton';
+import { GameModel } from '../types';
 
-function GameCard({game}) {
+function GameCard({game}: {game: GameModel}) {
     return (
         <Card className="m-3">
             <Card.Header><h3>{game.gameName}</h3></Card.Header>

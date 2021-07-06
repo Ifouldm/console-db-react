@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { ChangeEventHandler, Component, FormEvent, SyntheticEvent } from 'react';
 import {
     Card, Form, Button, Alert,
 } from 'react-bootstrap';
 import { insertConsole } from '../api';
 
-class AddConsole extends Component {
-    constructor(props) {
+interface IProps {}
+interface IState {
+    name: string,
+    description: string,
+}
+class AddConsole extends Component<IProps, IState> {
+    constructor(props: IProps) {
         super(props);
 
         this.state = {
@@ -14,17 +19,23 @@ class AddConsole extends Component {
         };
     }
 
-    handleChangeInputName = (event) => {
-        const name = event.target.value;
+    handleChangeInputName = (event: SyntheticEvent) => {
+        const target = event.target as typeof event.target & {
+            value: string
+        };
+        const name = target.value;
         this.setState({ name });
     }
 
-    handleChangeInputDescription = (event) => {
-        const description = event.target.value;
+    handleChangeInputDescription = (event: SyntheticEvent) => {
+        const target = event.target as typeof event.target & {
+            value: string
+        };
+        const description = target.value;
         this.setState({ description });
     }
 
-    handleAddMovie = async () => {
+    handleAddConsole = async () => {
         const { name, description } = this.state;
         const payload = { name, description };
 
@@ -65,7 +76,7 @@ class AddConsole extends Component {
                         </Form.Group>
 
                         <Form.Group>
-                            <Button onClick={this.handleAddMovie}>Add Console</Button>
+                            <Button onClick={this.handleAddConsole}>Add Console</Button>
                             {' '}
                             <Button href="/console/list">Cancel</Button>
                         </Form.Group>

@@ -3,8 +3,9 @@ import React from 'react';
 import { Card, Image } from 'react-bootstrap';
 import PropType from 'prop-types';
 import IconButton from './IconButton';
+import {ConsoleModel} from '../types';
 
-function ConsoleCard({consoleData}) {
+function ConsoleCard({consoleData}: {consoleData: ConsoleModel}) {
     return (
         <Card className="m-3">
             <Card.Header className="cardHeader">

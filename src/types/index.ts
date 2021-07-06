@@ -1,21 +1,20 @@
-import PropType from 'prop-types';
+export interface ConsoleModel {
+    name: string;
+    logoUrl?: string;
+    description?: string;
+    photoUrl?: string;
+    id?: string;
+}
 
-export const Console = PropType.shape({
-    name: PropType.string.isRequired,
-    logoUrl: PropType.string,
-    description: PropType.string,
-    photoUrl: PropType.string,
-    id: PropType.string.isRequired,
-}).isRequired;
-
-export interface Game {
-    gameName: String;
-    description: String;
-    manufacturer: String;
-    developer: String;
+export interface GameModel {
+    gameName: string;
+    description: string;
+    console: string;
+    manufacturer: string;
+    developer: string;
     year: Number;
     genre: Array<string>;
     score: Number;
     players: Number;
-    gameId: String;
+    gameId: string;
 }

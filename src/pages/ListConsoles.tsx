@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
-import PropType from 'prop-types';
 import { Error, Loading, Paginator } from '../components';
 import api from '../api';
 import ConsoleCard from '../components/ConsoleCard';
+import { AxiosError } from 'axios';
+import { ConsoleModel } from '../types';
 
-class ListConsoles extends Component {
-    constructor(props) {
+interface IState {
+    isLoading: boolean,
+    error: string,
+    consoles?: ConsoleModel[],
+    totalRecords?: number,
+    pageLimit?: number
+}
+
+interface IProps {}
+class ListConsoles extends Component<IProps, IState> {
+    pageSize = 10;
+    params = new URLSearchParams();
+
+    constructor(props: IProps) {
         super(props);
-        const {location} = props;
         this.state = {
             isLoading: true,
             error: '',
         };
-        this.pageSize = 10;
         this.onPageChanged = this.onPageChanged.bind(this);
         this.params = new URLSearchParams(location.search);
     }
 
     componentDidMount() {
         // eslint-disable-next-line import/no-named-as-default-member
-        api.getAllConsoles(0, this.pageSize, this.params.get('name'))
+        api.getAllConsoles(0, this.pageSize, this.params.get('name') || '')
             .then((consoles) => {
                 this.setState({
                     consoles: consoles.data._embedded.consoles,
@@ -29,18 +40,18 @@ class ListConsoles extends Component {
                     isLoading: false,
                 });
             })
-            .catch((err) => {
+            .catch((err: AxiosError) => {
                 this.setState({
                     isLoading: false,
-                    error: err.toString(),
+                    error: err.message,
                 });
             });
     }
 
-    onPageChanged({ currentPage: pageRequested }) {
+    onPageChanged({ currentPage }: { currentPage: number}) {
         this.setState({ isLoading: true });
         // eslint-disable-next-line import/no-named-as-default-member
-        api.getAllConsoles(pageRequested - 1, this.pageSize)
+        api.getAllConsoles(currentPage - 1, this.pageSize)
             .then((consoles) => {
                 this.setState({
                     consoles: consoles.data._embedded.consoles,
@@ -85,12 +96,6 @@ class ListConsoles extends Component {
             </Container>
         );
     }
-}
-
-ListConsoles.propTypes = {
-    location: PropType.shape({
-        search: PropType.string
-    }).isRequired
 }
 
 export default ListConsoles;

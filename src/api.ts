@@ -1,23 +1,18 @@
 import axios from 'axios';
-import { Console } from './types';
+import { ConsoleModel } from './types';
 
-const api = axios.create({
-    // baseURL: 'http://localhost:3000/api', // Express API
-    // baseURL: 'http://localhost:5000/api', // Local Spring API
-    baseURL: 'http://obidex.com/api', // Remote Spring API
-});
-
-export const insertConsole = (payload: Console) =>
-    api.post('/console', payload);
-export const getAllConsoles = (page = 0, size = 10) =>
-    api.get(`/consoles?page=${page}&size=${size}`);
-export const updateConsoleById = (id: String, payload: Console) =>
-    api.put(`/console/${id}`, payload);
-export const deleteConsoleById = (id: String) => api.delete(`/console/${id}`);
-export const getConsoleById = (id: String) => api.get(`/console/${id}`);
+export const insertConsole = (payload: ConsoleModel) =>
+    axios.post('/api/console', payload);
+export const getAllConsoles = (page = 0, size = 10, console?: String) =>
+    axios.get(`/api/consoles?page=${page}&size=${size}`);
+export const updateConsoleById = (id: String, payload: ConsoleModel) =>
+    axios.put(`/api/console/${id}`, payload);
+export const deleteConsoleById = (id: String) =>
+    axios.delete(`/api/console/${id}`);
+export const getConsoleById = (id: String) => axios.get(`/api/console/${id}`);
 export const getAllGames = (page = 0, size = 24) =>
-    api.get(`/games?page=${page}&size=${size}`);
-export const getGameById = (id: String) => api.get(`/game/${id}`);
+    axios.get(`/api/games?page=${page}&size=${size}`);
+export const getGameById = (id: String) => axios.get(`/api/game/${id}`);
 
 const apis = {
     insertConsole,

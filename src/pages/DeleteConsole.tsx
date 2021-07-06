@@ -4,12 +4,12 @@ import { useParams } from 'react-router-dom';
 import { deleteConsoleById } from '../api';
 
 const DeleteConsole = function deleteConsole() {
-    const { id } = useParams();
+    const { id } = useParams<Record<string, string | undefined>>()
     const [show, setShow] = useState(true);
 
     const handleClose = () => setShow(false);
 
-    function requestDelete(deleteId) {
+    function requestDelete(deleteId: string) {
         deleteConsoleById(deleteId)
             .then(() => {
                 // eslint-disable-next-line no-alert
@@ -30,7 +30,7 @@ const DeleteConsole = function deleteConsole() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-                    <Button variant="primary" onClick={() => requestDelete(id)}>Delete Console</Button>
+                    <Button variant="primary" onClick={() => requestDelete(id || '')}>Delete Console</Button>
                 </Modal.Footer>
             </Modal>
         </Container>

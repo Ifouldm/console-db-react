@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import {
     Card, Form, Button, Alert,
 } from 'react-bootstrap';
 import { updateConsoleById, getConsoleById } from '../api';
 
-class UpdateConsole extends Component {
-    constructor(props) {
+interface IProps {}
+
+interface IState {
+    id: string,
+    name: string,
+    description: string,
+}
+class UpdateConsole extends Component<IProps, IState> {
+    constructor(props: {match: {params: {id: string}}}) {
         super(props);
 
         // eslint-disable-next-line react/prop-types
@@ -18,13 +25,19 @@ class UpdateConsole extends Component {
         };
     }
 
-    handleChangeInputName = (event) => {
-        const name = event.target.value;
+    handleChangeInputName = (event: SyntheticEvent) => {
+        const target = event.target as typeof event.target & {
+            value: string
+        };
+        const name = target.value;
         this.setState({ name });
     }
 
-    handleChangeInputDescription = (event) => {
-        const description = event.target.value;
+    handleChangeInputDescription = (event: SyntheticEvent) => {
+        const target = event.target as typeof event.target & {
+            value: string
+        };
+        const description = target.value;
         this.setState({ description });
     }
 
