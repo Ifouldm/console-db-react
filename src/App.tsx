@@ -23,6 +23,7 @@ function App() {
                     <Route path="/game/list" exact component={ListGames} />
                     <Route path="/console/delete/:id" exact component={DeleteConsole} />
                     <Route path="/console/update/:id" exact component={UpdateConsole} />
+                    <Route render={() => <h1>404: page not found</h1>} />
                 </Switch>
             </Container>
         </Router>

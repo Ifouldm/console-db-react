@@ -1,7 +1,7 @@
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Loading, Paginator, Error } from '../components';
 import GameCard from '../components/GameCard';
 import api from '../api';
@@ -11,33 +11,32 @@ class ListGames extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            // totalRecords: 10,
-            // pageLimit: 20,
-            // games: [],
         };
+        this.pageSize = 24;
+        this.onPageChanged = this.onPageChanged.bind(this);
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         // eslint-disable-next-line import/no-named-as-default-member
-        await api.getAllGames().then((games) => {
+        api.getAllGames(0, this.pageSize).then((games) => {
             this.setState({
                 games: games.data._embedded.game,
                 totalRecords: games.data.page.totalElements,
                 pageLimit: games.data.page.size,
                 isLoading: false,
-                error: null,
             });
         }).catch((error) => {
             this.setState({
+                isLoading: false,
                 error,
             });
         });
     }
 
-    onPageChanged = async ({ currentPage: pageRequested }) => {
-        this.setState({ isLoading: false });
+    onPageChanged({ currentPage: pageRequested }) {
+        this.setState({ isLoading: true });
         // eslint-disable-next-line import/no-named-as-default-member
-        await api.getAllGames(pageRequested - 1).then((games) => {
+        api.getAllGames(pageRequested - 1, this.pageSize).then((games) => {
             this.setState({
                 games: games.data._embedded.game,
                 isLoading: false,
@@ -45,6 +44,7 @@ class ListGames extends Component {
             });
         }).catch((error) => {
             this.setState({
+                isLoading: false,
                 error,
             });
         });
@@ -55,21 +55,29 @@ class ListGames extends Component {
             games, isLoading, pageLimit, totalRecords, error,
         } = this.state;
 
-        if (isLoading) return <Loading />;
-
-        if (error) return <Error message={error} />;
-
         return (
             <Container>
-                {
-                    games.map((game) => (<GameCard game={game} key={game.gameName} />))
-                }
-                <Paginator
-                    totalRecords={totalRecords}
-                    pageLimit={pageLimit}
-                    pageNeighbours={1}
-                    onPageChanged={this.onPageChanged}
-                />
+                {isLoading && <Loading />}
+                {error && <Error message={error} />}
+                {games && (
+                    <Row className="mb-2">
+                        {
+                            games.map((game) => (
+                                <Col lg="4" md="6" className="mb-3" key={game.gameId}>
+                                    <GameCard game={game} />
+                                </Col>
+                            ))
+                        }
+                    </Row>
+                )}
+                {totalRecords && (
+                    <Paginator
+                        totalRecords={totalRecords}
+                        pageLimit={pageLimit}
+                        pageNeighbours={1}
+                        onPageChanged={this.onPageChanged}
+                    />
+                )}
             </Container>
         );
     }

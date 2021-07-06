@@ -35,12 +35,7 @@ class Paginator extends Component {
 
         this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
 
-        // eslint-disable-next-line react/no-unused-state
         this.state = { currentPage: 1 };
-    }
-
-    componentDidMount() {
-        this.gotoPage(1);
     }
 
     fetchPageNumbers = () => {
@@ -99,7 +94,7 @@ class Paginator extends Component {
     }
 
     gotoPage = (page) => {
-        const { onPageChanged = (f) => f } = this.props;
+        const { onPageChanged } = this.props;
         const currentPage = Math.max(0, Math.min(page, this.totalPages));
         const paginationData = {
             currentPage,
@@ -107,8 +102,7 @@ class Paginator extends Component {
             pageLimit: this.pageLimit,
             totalRecords: this.totalRecords,
         };
-
-        this.setState({ currentPage }, () => onPageChanged(paginationData));
+        this.setState({ currentPage }, onPageChanged(paginationData));
     }
 
     handleClick = (page) => (evt) => {
@@ -131,7 +125,6 @@ class Paginator extends Component {
 
         const { currentPage } = this.state;
         const pages = this.fetchPageNumbers();
-
         return (
             <>
                 <nav aria-label="Page selection">

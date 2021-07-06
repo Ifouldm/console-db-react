@@ -2,13 +2,13 @@ import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import PropType from 'prop-types';
 import IconButton from './IconButton';
 
-function GameCard(props) {
-    const { game } = props;
+function GameCard({game}) {
     return (
         <Card className="m-3">
-            <Card.Header>{game.gameName}</Card.Header>
+            <Card.Header><h3>{game.gameName}</h3></Card.Header>
             <Card.Body>
                 <Card.Text>
                     {game.description}
@@ -63,12 +63,29 @@ function GameCard(props) {
                         </Link>
                     </ListGroup.Item>
                 </ListGroup>
+            </Card.Body>
+            <Card.Footer>
                 <IconButton icon={faEdit} link={`/game/update/${game.gameId}`} variant="warning" />
                 {' '}
                 <IconButton icon={faTrashAlt} link={`/game/delete/${game.gameId}`} variant="danger" />
-            </Card.Body>
+            </Card.Footer>
         </Card>
     );
+}
+
+GameCard.propTypes = {
+    game: PropType.shape({
+        gameName: PropType.string,
+        description: PropType.string,
+        manufacturer: PropType.string,
+        console: PropType.string,
+        developer: PropType.string,
+        year: PropType.number,
+        genre: PropType.arrayOf(PropType.string),
+        score: PropType.number,
+        players: PropType.number,
+        gameId: PropType.string,
+    }).isRequired
 }
 
 export default GameCard;

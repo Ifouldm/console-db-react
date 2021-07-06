@@ -24,10 +24,14 @@
     border: solid 1px #5A4181;
 }
 
+.card {
+    height: 100%;
+}
+
 .cardHeader {
     display: flex;
     justify-content: space-evenly;
-    vertical-align: middle;
+    align-items: center;
 }
 
 .logoImg {

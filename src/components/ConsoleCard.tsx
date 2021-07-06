@@ -1,14 +1,14 @@
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { Card, Image } from 'react-bootstrap';
+import PropType from 'prop-types';
 import IconButton from './IconButton';
 
-function ConsoleCard(props) {
-    const { consoleData } = props;
+function ConsoleCard({consoleData}) {
     return (
         <Card className="m-3">
             <Card.Header className="cardHeader">
-                <div>{consoleData.name}</div>
+                <h1>{consoleData.name}</h1>
                 <Image className="logoImg" placeholder="https://via.placeholder.com/300" src={consoleData.logoUrl} alt="Console logo" />
             </Card.Header>
             <Card.Body>
@@ -22,6 +22,16 @@ function ConsoleCard(props) {
             </Card.Body>
         </Card>
     );
+}
+
+ConsoleCard.propTypes = {
+    consoleData: PropType.shape({
+        name: PropType.string.isRequired,
+        logoUrl: PropType.string,
+        description: PropType.string,
+        photoUrl: PropType.string,
+        id: PropType.string.isRequired,
+    }).isRequired
 }
 
 export default ConsoleCard;
